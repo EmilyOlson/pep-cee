@@ -1,0 +1,19 @@
+{
+  "name": "pep-see",
+  "version": "1.0.0",
+  "description": "a test project using vanilla js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmilyOlson/pep-cee.git"
+  },
+  "author": "Emily Olson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmilyOlson/pep-cee/issues"
+  },
+  "homepage": "https://github.com/EmilyOlson/pep-cee#readme"
+}
