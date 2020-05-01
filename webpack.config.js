@@ -3,6 +3,7 @@ const nodeExternals = require("webpack-node-externals");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackMd5Hash = require("webpack-md5-hash");
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -24,7 +25,10 @@ module.exports = {
       }, {
         test: /\.s[ac]ss$/i,
         use:  [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-      }
+      }, {
+        test: /\.html$/i,
+        use: 'html-loader',
+      },
     ],
   },
   resolve: {
@@ -37,9 +41,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: false,
       hash: true,
-      template: './src/index.html',
+      template: './src/index.htm',
       filename: 'index.html'
     }),
-    new WebpackMd5Hash()
+    new WebpackMd5Hash(),
+    new CompressionPlugin()
   ]
 }
