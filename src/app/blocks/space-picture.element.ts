@@ -2,17 +2,25 @@ import { AppElement, CustomAppElement } from '../core/app-element.decorator';
 import { AppImg } from '../elements/img.element';
 import { Photo } from '../data/state.interfaces';
 import { AppTxt } from '../elements/text.elemet';
-export const spacePicture = 'pic-of-the-day';
 
-const ids = {
-    heroBanner: 'hero-banner',
-    heroDescription: 'hero-description'
-}
+export const spacePicture = 'pic-of-the-day';
 
 @CustomAppElement({
     selector: spacePicture,
     template: require('./space-picture.template.html'),
-    style: '.hero { height: 500px; width: 100%; overflow: hidden;} .hero-title { background-color: black; color: white; font-variant-caps: small-caps; }',
+    style:`
+        :host {
+            height: 500px; 
+            width: 100%;
+            display: block;
+            position: relative;
+        }
+        .hero-title {
+            background-color: black; 
+            color: white; 
+            font-variant-caps: small-caps; 
+        }
+    `
 })
 export class SpacePicture extends AppElement {
     static create = () => document.createElement(spacePicture) as SpacePicture;    

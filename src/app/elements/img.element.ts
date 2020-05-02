@@ -1,24 +1,25 @@
 import { AppElement, CustomAppElement } from '../core/app-element.decorator';
 
-export const appImg = 'lazy-image';
+export const appImg = 'img-element';
 
 @CustomAppElement({
     selector: appImg,
     template: '<img />',
     style: `
-        :host { 
-            position: relative;
+        :host {
+            overflow: hidden;
+            position: fixed;
+            z-index: -1;
         }
         img {
-            position: absolute;
             z-index: -1;
             width: 100%;
             height: auto;
         }
-    `,
+    `
 })
 export class AppImg extends AppElement {
-    static create = () => document.createElement('lazy-image') as AppImg;
+    static create = () => document.createElement(appImg) as AppImg;
 
     onKablam() {
         const { src, alt, id} = this.getState();

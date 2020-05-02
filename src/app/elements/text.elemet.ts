@@ -5,10 +5,12 @@ export const appImg = 'text-element';
 @CustomAppElement({
     selector: appImg,
     template: '',
-    style: `:host {
-        color: white;
-        background-color: black;
-      }`,
+    style: `
+        :host {
+            color: white;
+            background-color: black;
+        }
+      `
 })
 export class AppTxt extends AppElement {
     static create = () => document.createElement('text-element') as AppTxt;

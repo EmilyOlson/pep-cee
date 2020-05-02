@@ -1,4 +1,4 @@
-import { AppControllerElement, CustomAppElement } from '../core/app-element.decorator';
+import { AppElement, CustomAppElement } from '../core/app-element.decorator';
 import { HomePage } from './home.page';
 import { DetailPage } from './detail.page';
 import { Router } from '../core/route.generator';
@@ -11,7 +11,7 @@ const appLayout = 'app-layout';
     selector: appLayout,
     template: '',
 })
-export class AppLayout extends AppControllerElement {
+export class AppLayout extends AppElement {
     private router: Router;
 
     constructor() {

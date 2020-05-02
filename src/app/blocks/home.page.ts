@@ -16,7 +16,7 @@ export class HomePage extends AppElement {
     onKablam() {
         const spacePicture = SpacePicture.create() as AppElement;
         const { spacePhoto } = this.getState();
-        spacePicture.setState( spacePhoto )
+        spacePicture.setState( spacePhoto );
 
         this.inject(spacePicture);
         this.inject(SpaceFacts.create());

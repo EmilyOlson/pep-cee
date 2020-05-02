@@ -144,12 +144,3 @@ export class AppElement extends HTMLElement {
         }
     }
 }
-
-export class AppControllerElement extends AppElement {
-}
-
-export class DataAppElement extends AppElement {
-    connectedCallback() {
-
-    }
-}
