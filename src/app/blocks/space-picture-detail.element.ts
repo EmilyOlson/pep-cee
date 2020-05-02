@@ -8,7 +8,7 @@ const ids = {
 
 @CustomAppElement({
     selector: spacePictureDetail,
-    template: `<div><div class="hero" id="hero-banner"><h1 class="hero-title">Pic of the Day</h1><peep-hole></peep-hole></div><div id="hero-description">detail text!</div><a href="#home">home</a></div>`,
+    template: `<div><div class="hero" id="hero-banner"><peep-hole name="background"></peep-hole><h1 class="hero-title">Pic of the Day</h1><peep-hole name="body"></peep-hole></div><div id="hero-description">detail text!</div><a href="#home">home</a></div>`,
     style: '.hero { height: 500px; width: 100%; background-size: cover; background-color: black;} .hero-title { background-color: black; color: white; font-variant-caps: small-caps;}'
 })
 export class SpacePictureDetail extends AppElement {

@@ -1,29 +1,22 @@
-import { AppControllerElement, AppElement, CustomAppElement } from '../core/app-element.decorator';
+import { AppControllerElement, CustomAppElement } from '../core/app-element.decorator';
 import { HomePage } from './home.page';
 import { DetailPage } from './detail.page';
 import { Router } from '../core/route.generator';
+
+import { defaultState } from '../data/default-state.data';
 
 const appLayout = 'app-layout';
 
 @CustomAppElement({
     selector: appLayout,
-    template: '<div></div>',
+    template: '',
 })
 export class AppLayout extends AppControllerElement {
     private router: Router;
 
     constructor() {
         super();
-        this.setState(
-            { 
-                facts: [],
-                spacePhoto: {
-                    title: 'huh',
-                    author: 'me',
-                    href: 'https://apod.nasa.gov/apod/image/2004/M31Dec2019final1YuzheB2_1024.jpg'
-                }
-            }
-        );
+        this.setState(defaultState);
         this.navigateHome = this.navigateHome.bind(this);
         this.navigateDetail = this.navigateDetail.bind(this);
 

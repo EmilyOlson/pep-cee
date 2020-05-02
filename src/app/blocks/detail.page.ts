@@ -5,7 +5,7 @@ const detailPage = 'detail-layout';
 
 @CustomAppElement({
     selector: detailPage,
-    template: '<div></div>',
+    template: '',
 })
 export class DetailPage extends AppElement {
     static create = () => document.createElement(detailPage);

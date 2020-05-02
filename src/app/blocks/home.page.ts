@@ -1,6 +1,6 @@
 import { AppElement, CustomAppElement } from '../core/app-element.decorator';
 import { SpacePicture } from './space-picture.element';
-import { SpaceFacts, spaceFacts } from './space-facts.element';
+import { SpaceFacts } from './space-facts.element';
 import { IisLocation } from './space-location.element';
 import { SpaceFooter } from './space-footer.element';
 
@@ -8,7 +8,7 @@ const homePage = 'home-layout';
 
 @CustomAppElement({
     selector: homePage,
-    template: '<div><peep-hole><peep-hole></div>',
+    template: '',
 })
 export class HomePage extends AppElement {
     static create = () => document.createElement(homePage);

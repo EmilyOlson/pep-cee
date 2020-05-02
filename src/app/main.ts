@@ -1,4 +1,4 @@
-import { AppLayout } from './elements/layout';
+import { AppLayout } from './blocks/layout';
 
 export class App {
     rootElements =  [ AppLayout ];

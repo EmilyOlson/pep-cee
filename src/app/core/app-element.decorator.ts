@@ -21,22 +21,22 @@ interface CustomElementConfig {
 const copy = (orig: object): object => JSON.parse(JSON.stringify(orig));
 
 const validateSelector = (selector: string) => {
-    if(selector.indexOf('-') <= 0 ) {
+    if (selector.indexOf('-') <= 0) {
         throw new Error('custom tags require dashes.');
     }
 }
 
 const validateTemplate = (template: string) => {
-    if(!template && template !== '') {
-        throw new Error ('your custom element needs a template.')
+    if (!template && template !== '') {
+        throw new Error('your custom element needs a template.')
     }
 }
 
 const getClassMethodOrDefualt = (object: any, methodName: string): any => {
-    if(object.prototype[methodName]) {
+    if (object.prototype[methodName]) {
         return object.prototype[methodName];
     }
-    return () => {};
+    return () => { };
 }
 
 const setClassMethod = (object: any, methodName: string, method: Function) => {
@@ -46,16 +46,17 @@ const setClassMethod = (object: any, methodName: string, method: Function) => {
 export const CustomAppElement = (config: CustomElementConfig) => (customElementClass: any) => {
     validateSelector(config.selector);
     validateTemplate(config.template);
-    
+
     // initialize template
     const template = document.createElement('template');
     let templateHtmlString = config.template;
-    if(config.style) {
+    if (config.style) {
         templateHtmlString = `<style>${config.style}</style>${config.template}`;
     }
     template.innerHTML = templateHtmlString;
 
     // adopt lifecycle methods
+    const inheritedCallback = getClassMethodOrDefualt(customElementClass, 'connectedCallback');
     const connectedCallback = getClassMethodOrDefualt(customElementClass, lifecycleAliases.connectedCallback);
     const disconnectCallBack = getClassMethodOrDefualt(customElementClass, lifecycleAliases.disconnectedCallback);
 
@@ -68,12 +69,13 @@ export const CustomAppElement = (config: CustomElementConfig) => (customElementC
     // connected lifecycle
     function onConnectedCallback() {
         const clone = document.importNode(template.content, true);
-        if(config.style) {
-            this.attachShadow({mode: 'open'}).appendChild(clone);
+        if (config.style) {
+            this.attachShadow({ mode: 'open' }).appendChild(clone);
         } else {
             this.appendChild(clone);
         }
         beforeConnectedCallback();
+        inheritedCallback.call(this);
         connectedCallback.call(this);
         afterConnectedCallback();
     }
@@ -94,24 +96,25 @@ export const CustomAppElement = (config: CustomElementConfig) => (customElementC
 
 @CustomAppElement({
     selector: transcludeSelector,
-    template:''
+    template: ''
 })
 
-class TranslcusionTarget extends HTMLElement {}
-
-export class AppElement extends HTMLElement {    
-    private transcludeTarget: Element | ShadowRoot;
+export class AppElement extends HTMLElement {
+    private transcludeTarget: Record<string, Element | ShadowRoot> = {};
     private state = {}
 
+    create = () => { }
+
     setState(stateFragment: any): any {
-        this.state = {...copy(this.state), ...copy(stateFragment)}
+        this.state = { ...copy(this.state), ...copy(stateFragment) }
     }
 
-    getState() : any {
-        return {...copy(this.state)};
+    getState(): any {
+        return { ...copy(this.state) };
     }
 
     findSingleOrBase(query: string): HTMLElement {
+        if (!query) return (this.shadowRoot || this) as HTMLElement;
         return ((this.shadowRoot ? (this.shadowRoot.querySelector(query) || this.shadowRoot) : (this.querySelector(query) || this)) as HTMLElement);
     }
 
@@ -123,16 +126,30 @@ export class AppElement extends HTMLElement {
         return (this.shadowRoot ? this.shadowRoot.querySelectorAll(query) : this.querySelectorAll(query));
     }
 
-    inject(transcludeElement: HTMLElement) {        
-        this.transcludeTarget = this.findSingleOrBase(transcludeSelector);
-        this.transcludeTarget.appendChild(transcludeElement);
+    inject(transcludeElement: HTMLElement, targetName: string = null) {
+        const targetProp: string = targetName || 'base';
+        if (!this.transcludeTarget[targetProp]) {
+            const query = targetName ? `${transcludeSelector}[name="${targetName}"]` : transcludeSelector;
+            this.transcludeTarget[targetProp] = this.findSingleOrBase(query);
+        }
+        this.transcludeTarget[targetProp].appendChild(transcludeElement);
     }
 
     empty() {
-        while(this.transcludeTarget && this.transcludeTarget.firstChild) {
-            this.transcludeTarget.removeChild(this.transcludeTarget.firstChild);
-        }        
+        for (const property in this.transcludeTarget) {
+            const targetElement = this.transcludeTarget[property];
+            while (targetElement.firstChild) {
+                targetElement.removeChild(targetElement.firstChild);
+            }
+        }
     }
 }
+
 export class AppControllerElement extends AppElement {
+}
+
+export class DataAppElement extends AppElement {
+    connectedCallback() {
+
+    }
 }
