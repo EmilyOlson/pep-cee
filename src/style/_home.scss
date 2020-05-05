@@ -2,6 +2,7 @@
   &__layout {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
   &__segment {
     min-height: 200px;
