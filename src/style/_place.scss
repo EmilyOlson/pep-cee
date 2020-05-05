@@ -1,0 +1,32 @@
+#place {
+  background-color: rgb(200, 200, 200);
+  .home__segment-content {
+    box-shadow: 0 0 25px 0 rgb(190, 190, 190);
+  }
+}
+.satellite {
+  &__container {
+    position: relative;
+  }
+
+  &__location {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    color: white;
+  }
+
+  &__location-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__location-title {
+    padding: $standard-padding;
+  }
+}

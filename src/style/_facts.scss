@@ -1,0 +1,47 @@
+#facts {
+  background-color:white;
+  z-index: 1;
+  .home__segment-content {
+    box-shadow: inset 0 0 50px 0 rgb(240, 240, 240);
+  }
+}
+
+
+.facts {
+  &__container {
+    overflow-x: hidden;
+  }
+  &__slider {
+    display: flex;
+    align-items: stretch;
+    width: 300%;
+    margin-left: -100%;
+
+    @media (min-width: $desktop-break) {
+        width: 150%;
+        margin-left: -25%;
+    }
+  }
+
+  &__item {
+    padding: $standard-padding * 3 2.5%;
+    width: 66.67%;
+    display: flex;
+    flex-direction: row;
+    opacity: .25;
+
+    &--focus {
+        opacity: 1;
+    }
+
+  }
+
+  &__content {
+    padding: $standard-padding;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+  }
+}

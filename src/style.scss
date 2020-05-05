@@ -1,1 +1,71 @@
-@import 'style/reset'
+@import "style/reset";
+@import "style/variables";
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 0.975em;
+  line-height: 1.5em;
+  text-align: justify;
+
+  @media (min-width: $desktop-break) {
+    font-size: 1em;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 100;
+  font-style: normal;
+  line-height: 1.75em;
+  text-align: left;
+}
+
+h1 {
+  font-size: 2.75em;
+  font-style: normal;
+  text-transform: uppercase;
+
+  @media (min-width: $desktop-break) {
+    font-size: 3em;
+  }
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: 100;
+  @media (min-width: $desktop-break) {
+    font-size: 2.5em;
+  }
+}
+
+h3 {
+  font-size: 1.75em;
+  font-weight: 100;
+  @media (min-width: $desktop-break) {
+    font-size: 2em;
+  }
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: 300;
+  @media (min-width: $desktop-break) {
+    font-size: 1.25em;
+  }
+}
+
+a {
+  color: #47b6f4;
+}
+
+@import "style/home";
+@import "style/hero";
+@import "style/facts";
+@import "style/place";
+@import "style/footer";
+
+@import "style/img";

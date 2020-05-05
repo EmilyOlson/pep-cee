@@ -1,1 +1,3 @@
-console.log('test');
+import { App } from "./app/main";
+
+new App();
