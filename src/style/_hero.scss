@@ -1,5 +1,8 @@
 #hero {
-  background-color: rgb(53, 53, 53);
+  background-color: rgb(55, 55, 55);
+  .home__segment-content {
+    box-shadow: 0 0 25px 0 rgb(50, 50, 50);
+  }
 }
 
 .hero {
@@ -28,26 +31,25 @@
   }
 
   &__title {
-    background-color: rgba(53, 53, 53, .75);
+    background-color: rgba(53, 53, 53, 0.75);
     padding: $standard-padding * 2;
     color: white;
     text-align: center;
   }
 
-
-
-  &__summary, &__detail {
+  &__summary,
+  &__detail {
     background-color: black;
     color: white;
     width: 100%;
   }
 
   &__summary {
-    background-color: rgba(53, 53, 53, .75);
-
+    background-color: rgba(53, 53, 53, 0.75);
   }
 
-  &__summary-content, &__detail-content {
+  &__summary-content,
+  &__detail-content {
     padding: $standard-padding $standard-padding * 2;
 
     a {
@@ -57,7 +59,8 @@
     }
   }
 
-  &__summary-title, &__detail-title {
+  &__summary-title,
+  &__detail-title {
     display: block;
     font-weight: 500;
     padding: $standard-padding 0;
@@ -66,8 +69,8 @@
   &__summary-title {
     text-align: center;
     -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;  
-    overflow: hidden;  
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__summary-text {
