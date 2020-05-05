@@ -4,28 +4,21 @@ export const appImg = 'img-element';
 
 @CustomAppElement({
     selector: appImg,
-    template: '<img />',
-    style: `
-        :host {
-            overflow: hidden;
-            position: fixed;
-            z-index: -1;
-        }
-        img {
-            z-index: -1;
-            width: 100%;
-            height: auto;
-        }
-    `
+    template: '<div class="image__projection"><img class="image__element" /></div>',
 })
 export class AppImg extends AppElement {
     static create = () => document.createElement(appImg) as AppImg;
 
     onKablam() {
-        const { src, alt, id} = this.getState();
-        const img = this.findSingleOrBase('img');
+        const { src, alt, css } = this.getState();
+
+        css && this.setAttribute('class', css);
+
+        const div = this.findSingle('div');
+        div.style.backgroundImage = `url('${src}')`;
+
+        const img = this.findSingle('img');
         img.setAttribute('src', src);
-        img.setAttribute('alt', alt);
-        img.id = id;
+        img.setAttribute('alt', alt)
     }
 }

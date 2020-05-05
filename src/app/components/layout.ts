@@ -2,7 +2,6 @@ import { AppElement, CustomAppElement } from '../core/app-element.decorator';
 import { HomePage } from './home.page';
 import { DetailPage } from './detail.page';
 import { Router } from '../core/route.generator';
-
 import { defaultState } from '../data/default-state.data';
 
 const appLayout = 'app-layout';

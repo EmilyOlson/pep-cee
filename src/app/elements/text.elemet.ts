@@ -4,13 +4,7 @@ export const appImg = 'text-element';
 
 @CustomAppElement({
     selector: appImg,
-    template: '',
-    style: `
-        :host {
-            color: white;
-            background-color: black;
-        }
-      `
+    template: ''
 })
 export class AppTxt extends AppElement {
     static create = () => document.createElement('text-element') as AppTxt;
@@ -18,7 +12,7 @@ export class AppTxt extends AppElement {
     onKablam() {
         const { text } = this.getState();
         const container = this.findSingleOrBase('');
-        container.textContent = text;
 
+        container.textContent = text;
     }
 }

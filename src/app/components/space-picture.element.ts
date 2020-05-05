@@ -8,19 +8,6 @@ export const spacePicture = 'pic-of-the-day';
 @CustomAppElement({
     selector: spacePicture,
     template: require('./space-picture.template.html'),
-    style:`
-        :host {
-            height: 500px; 
-            width: 100%;
-            display: block;
-            position: relative;
-        }
-        .hero-title {
-            background-color: black; 
-            color: white; 
-            font-variant-caps: small-caps; 
-        }
-    `
 })
 export class SpacePicture extends AppElement {
     static create = () => document.createElement(spacePicture) as SpacePicture;    
@@ -31,15 +18,19 @@ export class SpacePicture extends AppElement {
 
     refresh (state: Photo) {
         // get relevant state data
-        const { href, text } = state;       
+        const { href, text, title } = state;       
 
         const imgElement = AppImg.create();
-        imgElement.setState({ src: href });
+        imgElement.setState({ src: href, alt: title, css: 'hero__image' });
 
         const textElement = AppTxt.create();
         textElement.setState({ text: text });
+
+        const titleElement = AppTxt.create();
+        titleElement.setState( { text: title });
         
         this.inject(imgElement, 'hero-image');
-        this.inject(textElement, 'hero-description');
+        this.inject(titleElement, 'hero-title');
+        this.inject(textElement, 'hero-summary');
     }
 }

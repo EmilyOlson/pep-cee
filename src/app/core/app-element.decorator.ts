@@ -126,7 +126,7 @@ export class AppElement extends HTMLElement {
         return (this.shadowRoot ? this.shadowRoot.querySelectorAll(query) : this.querySelectorAll(query));
     }
 
-    inject(transcludeElement: HTMLElement, targetName: string = null) {
+    inject(transcludeElement: HTMLElement, targetName: string = '') {
         const targetProp: string = targetName || 'base';
         if (!this.transcludeTarget[targetProp]) {
             const query = targetName ? `${transcludeSelector}[name="${targetName}"]` : transcludeSelector;
@@ -135,7 +135,22 @@ export class AppElement extends HTMLElement {
         this.transcludeTarget[targetProp].appendChild(transcludeElement);
     }
 
-    empty() {
+    hide() {
+        this.hidden = true;
+    }
+
+    show() {
+        this.hidden = false;
+    }
+
+    empty( targetName: string = '') {
+        if(targetName) {
+            const targetElement = this.transcludeTarget[targetName];
+            while (targetElement && targetElement.firstChild) {
+                targetElement.removeChild(targetElement.firstChild);
+            }
+            return;
+        }
         for (const property in this.transcludeTarget) {
             const targetElement = this.transcludeTarget[property];
             while (targetElement.firstChild) {

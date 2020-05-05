@@ -1,0 +1,18 @@
+.home {
+  &__layout {
+    display: flex;
+    flex-direction: column;
+  }
+  &__segment {
+    min-height: 200px;
+  }
+
+  &__segment-content {
+    display: block;
+    margin: 0 auto;
+
+    @media (min-width: 1500px) {
+      max-width: 1400px;
+    }
+  }
+}

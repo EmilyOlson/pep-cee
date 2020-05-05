@@ -1,0 +1,19 @@
+.image {
+  &__projection {
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+  }
+  &__element {
+    width: auto;
+    height: initial;
+    visibility: hidden;
+
+    @media (min-width: $desktop-break) {
+        width: 100%;
+        height: auto;
+    }
+  }
+}

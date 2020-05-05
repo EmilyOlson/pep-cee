@@ -4,8 +4,7 @@ export const spaceFacts = 'space-facts';
 
 @CustomAppElement({
     selector: spaceFacts,
-    template: '<div class="facts">facts!</div>',
-    style: '',
+    template: require('./space-facts.template.html'),
 })
 export class SpaceFacts extends AppElement {
     static create = () => document.createElement(spaceFacts);

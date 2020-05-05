@@ -4,8 +4,7 @@ export const spaceFooter = 'space-footer';
 
 @CustomAppElement({
     selector: spaceFooter,
-    template: '<div><div class="footer">space footer!</div><a href="#detail">detail</a></div>',
-    style: '',
+    template: require('./space-footer.template.html'),
 })
 export class SpaceFooter extends AppElement {
     static create = () => document.createElement(spaceFooter);
