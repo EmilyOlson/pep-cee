@@ -5,14 +5,14 @@ import { AppTxt } from '../elements/text.elemet';
 
 export const spaceLocation = 'space-place';
 
-const iisImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/International_Space_Station_after_undocking_of_STS-132.jpg/1024px-International_Space_Station_after_undocking_of_STS-132.jpg';
+const issImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/International_Space_Station_after_undocking_of_STS-132.jpg/1024px-International_Space_Station_after_undocking_of_STS-132.jpg';
 
 @CustomAppElement({
     selector: spaceLocation,
     template: require('./space-place.template.html'),
     style: '',
 })
-export class IisLocation extends AppElement {
+export class IssLocation extends AppElement {
     static create = () => document.createElement(spaceLocation);
 
     onKablam() {
@@ -24,7 +24,7 @@ export class IisLocation extends AppElement {
         const { position } = state;
 
         const imgElement = AppImg.create();
-        imgElement.setState({ src: iisImage, alt: 'iis', css: 'satellite__image' });
+        imgElement.setState({ src: issImage, alt: 'iss', css: 'satellite__image' });
         
         const latText = AppTxt.create();
         latText.setState({ text: position.latitude });
