@@ -3,6 +3,8 @@ import { HomePage } from './home.page';
 import { DetailPage } from './detail.page';
 import { Router } from '../core/route.generator';
 import { defaultState } from '../data/default-state.data';
+import { DataRequestService } from '../data/data-request.service';
+import { AppState } from '../data/state.interfaces';
 
 const appLayout = 'app-layout';
 
@@ -12,6 +14,7 @@ const appLayout = 'app-layout';
 })
 export class AppLayout extends AppElement {
     private router: Router;
+    private readonly requestService: DataRequestService;
 
     constructor() {
         super();
@@ -25,26 +28,40 @@ export class AppLayout extends AppElement {
                 { name: '#detail', action: this.navigateDetail}
             ]
         });
+        
+        this.requestService = new DataRequestService();        
     }
 
     onKablam() {
+        this.refresh(this.getState());
+        this.loadData();
+    }
+
+    async loadData(): Promise<void> {
+        const podData = await this.requestService.getPictureOfTheDay();
+        const iisCoords = await this.requestService.getIssCoordinates();
+        this.setState({ spacePhoto: podData, satellite: iisCoords });
+        this.refresh(this.getState())
+    }
+
+    refresh(state: AppState) {
         if(this.router.isCurrent('#detail')) {
-            this.navigateDetail();
+            this.navigateDetail(state);
         } else {
-            this.navigateHome();
+            this.navigateHome(state);
         }
     }
     
-    navigateHome() {
+    navigateHome(state: AppState) {
         const page: any = HomePage.create();
-        page.setState(this.getState());
+        page.setState(state);
         this.empty();
         this.inject(page);
     }
 
-    navigateDetail() {
+    navigateDetail(state: AppState) {
         const page: any = DetailPage.create();
-        page.setState(this.getState());
+        page.setState(state);
         this.empty();
         this.inject(page);
     }
