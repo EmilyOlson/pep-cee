@@ -33,7 +33,7 @@ export class AppLayout extends AppElement {
     }
 
     onKablam() {
-        this.refresh(this.getState());
+        this.refresh();
         this.loadData();
     }
 
@@ -41,27 +41,27 @@ export class AppLayout extends AppElement {
         const podData = await this.requestService.getPictureOfTheDay();
         const iisCoords = await this.requestService.getIssCoordinates();
         this.setState({ spacePhoto: podData, satellite: iisCoords });
-        this.refresh(this.getState())
+        this.refresh()
     }
 
-    refresh(state: AppState) {
+    refresh() {
         if(this.router.isCurrent('#detail')) {
-            this.navigateDetail(state);
+            this.navigateDetail();
         } else {
-            this.navigateHome(state);
+            this.navigateHome();
         }
     }
     
-    navigateHome(state: AppState) {
+    navigateHome() {
         const page: any = HomePage.create();
-        page.setState(state);
+        page.setState(this.getState());
         this.empty();
         this.inject(page);
     }
 
-    navigateDetail(state: AppState) {
+    navigateDetail() {
         const page: any = DetailPage.create();
-        page.setState(state);
+        page.setState(this.getState());
         this.empty();
         this.inject(page);
     }
