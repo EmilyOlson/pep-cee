@@ -14,7 +14,7 @@ export class Router {
             const newDestination = routesConfig.routes.find(route => (
                 route.name === location.hash
             ));
-
+            window.scrollTo(0, 0);
             newDestination ? newDestination.action() : routesConfig.routes[0].action();
         });
     }
