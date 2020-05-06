@@ -1,6 +1,3 @@
-
-export const transcludeSelector = 'peep-hole';
-
 const lifecycleAliases = {
     beforeAttach: 'preKablam',
     connectedCallback: 'onKablam', // native
@@ -18,8 +15,6 @@ interface CustomElementConfig {
 }
 
 // utils
-const copy = (orig: object): object => JSON.parse(JSON.stringify(orig));
-
 const validateSelector = (selector: string) => {
     if (selector.indexOf('-') <= 0) {
         throw new Error('custom tags require dashes.');
@@ -92,70 +87,4 @@ export const CustomAppElement = (config: CustomElementConfig) => (customElementC
     setClassMethod(customElementClass, 'disconnectedCallback', onDisconnectedCallback);
 
     window.customElements.define(config.selector, customElementClass);
-}
-
-@CustomAppElement({
-    selector: transcludeSelector,
-    template: ''
-})
-
-export class AppElement extends HTMLElement {
-    private transcludeTarget: Record<string, Element | ShadowRoot> = {};
-    private state = {}
-
-    create = () => { }
-
-    setState(stateFragment: any): any {
-        this.state = { ...copy(this.state), ...copy(stateFragment) }
-    }
-
-    getState(): any {
-        return { ...copy(this.state) };
-    }
-
-    findSingleOrBase(query: string): HTMLElement {
-        if (!query) return (this.shadowRoot || this) as HTMLElement;
-        return ((this.shadowRoot ? (this.shadowRoot.querySelector(query) || this.shadowRoot) : (this.querySelector(query) || this)) as HTMLElement);
-    }
-
-    findSingle(query: string): HTMLElement {
-        return ((this.shadowRoot ? this.shadowRoot.querySelector(query) : this.querySelector(query)) as HTMLElement);
-    }
-
-    findAll(query: string): NodeListOf<HTMLElement> {
-        return (this.shadowRoot ? this.shadowRoot.querySelectorAll(query) : this.querySelectorAll(query));
-    }
-
-    inject(transcludeElement: HTMLElement, targetName: string = '') {
-        const targetProp: string = targetName || 'base';
-        if (!this.transcludeTarget[targetProp]) {
-            const query = targetName ? `${transcludeSelector}[name="${targetName}"]` : transcludeSelector;
-            this.transcludeTarget[targetProp] = this.findSingleOrBase(query);
-        }
-        this.transcludeTarget[targetProp].appendChild(transcludeElement);
-    }
-
-    hide() {
-        this.hidden = true;
-    }
-
-    show() {
-        this.hidden = false;
-    }
-
-    empty( targetName: string = '') {
-        if(targetName) {
-            const targetElement = this.transcludeTarget[targetName];
-            while (targetElement && targetElement.firstChild) {
-                targetElement.removeChild(targetElement.firstChild);
-            }
-            return;
-        }
-        for (const property in this.transcludeTarget) {
-            const targetElement = this.transcludeTarget[property];
-            while (targetElement.firstChild) {
-                targetElement.removeChild(targetElement.firstChild);
-            }
-        }
-    }
 }

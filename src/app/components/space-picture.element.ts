@@ -1,4 +1,4 @@
-import { AppElement, CustomAppElement } from '../core/app-element.decorator';
+import { AppElement, CustomAppElement } from '../core/app-element';
 import { AppImg } from '../elements/img.element';
 import { Photo } from '../data/state.interfaces';
 import { AppTxt } from '../elements/text.elemet';

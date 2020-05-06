@@ -1,4 +1,4 @@
-import { AppElement, CustomAppElement } from '../core/app-element.decorator';
+import { AppElement, CustomAppElement } from '../core/app-element';
 
 export const spaceFooter = 'space-footer';
 

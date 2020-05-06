@@ -1,10 +1,9 @@
-import { AppElement, CustomAppElement } from '../core/app-element.decorator';
+import { AppElement, CustomAppElement } from '../core/app-element';
 import { HomePage } from './home.page';
 import { DetailPage } from './detail.page';
 import { Router } from '../core/route.generator';
 import { defaultState } from '../data/default-state.data';
 import { DataRequestService } from '../data/data-request.service';
-import { AppState } from '../data/state.interfaces';
 
 const appLayout = 'app-layout';
 

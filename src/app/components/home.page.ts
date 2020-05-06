@@ -1,4 +1,4 @@
-import { AppElement, CustomAppElement } from '../core/app-element.decorator';
+import { AppElement, CustomAppElement } from '../core/app-element';
 import { SpacePicture } from './space-picture.element';
 import { SpaceFacts } from './space-facts.element';
 import { IssLocation } from './space-place.element';

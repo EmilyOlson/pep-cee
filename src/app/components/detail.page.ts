@@ -1,4 +1,4 @@
-import { AppElement, CustomAppElement } from '../core/app-element.decorator';
+import { AppElement, CustomAppElement } from '../core/app-element';
 import { SpacePictureDetail } from './space-picture-detail.element';
 
 const detailPage = 'detail-layout';
